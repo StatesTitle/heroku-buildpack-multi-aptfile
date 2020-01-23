@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+indent() {
+    sed -u 's/^/       /'
+}
+
+BUILD_DIR=$1
+CACHE_DIR=$2
+ENV_DIR=$3
+
+APTFILE=$(cat "${ENV_DIR}/APTFILE")
+
+if [[ -z "${APTFILE}" ]]; then
+    echo "APTFILE was not set. Aborting" | indent
+    exit 1
+fi
+
+cp "${BUILD_DIR}/${APTFILE}" "${BUILD_DIR}/Aptfile"
+
+if ! [ $? ]; then
+    echo "FAILED to copy an Aptfile" | indent
+    exit 1
+fi
+
+echo "Copied ${APTFILE} as Aptfile successfully" | indent

@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+echo "Multi-aptfile"
+exit 0
